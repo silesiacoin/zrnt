@@ -24,7 +24,7 @@ func NewForkDecoder(spec *common.Spec, genesisValRoot common.Root) *ForkDecoder 
 		Spec:     spec,
 		Genesis:  common.ComputeForkDigest(spec.GENESIS_FORK_VERSION, genesisValRoot),
 		Altair:   common.ComputeForkDigest(spec.ALTAIR_FORK_VERSION, genesisValRoot),
-		Merge:    common.ComputeForkDigest(spec.MERGE_FORK_VERSION, genesisValRoot),
+		Merge:    common.ComputeForkDigest(spec.BELLATRIX_FORK_VERSION, genesisValRoot),
 		Sharding: common.ComputeForkDigest(spec.SHARDING_FORK_VERSION, genesisValRoot),
 	}
 }
@@ -68,7 +68,7 @@ func (s *StandardUpgradeableBeaconState) UpgradeMaybe(ctx context.Context, spec 
 		}
 		s.BeaconState = post
 	}
-	if tpre, ok := s.BeaconState.(*altair.BeaconStateView); ok && slot == common.Slot(spec.MERGE_FORK_EPOCH)*spec.SLOTS_PER_EPOCH {
+	if tpre, ok := s.BeaconState.(*altair.BeaconStateView); ok && slot == common.Slot(spec.BELLATRIX_FORK_EPOCH)*spec.SLOTS_PER_EPOCH {
 		post, err := merge.UpgradeToMerge(spec, epc, tpre)
 		if err != nil {
 			return fmt.Errorf("failed to upgrade atalir to merge state: %v", err)

@@ -127,7 +127,7 @@ func (c *BlocksTestCase) Load(t *testing.T, forkName ForkName, readPart TestPart
 		case "merge":
 			dst := new(merge.SignedBeaconBlock)
 			LoadSpecObj(t, fmt.Sprintf("blocks_%d", i), dst, readPart)
-			digest := common.ComputeForkDigest(c.Spec.MERGE_FORK_VERSION, valRoot)
+			digest := common.ComputeForkDigest(c.Spec.BELLATRIX_FORK_VERSION, valRoot)
 			return dst.Envelope(c.Spec, digest)
 		default:
 			t.Fatalf("unrecognized fork name: %s", forkName)

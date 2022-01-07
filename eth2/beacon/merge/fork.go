@@ -27,7 +27,7 @@ func UpgradeToMerge(spec *common.Spec, epc *common.EpochsContext, pre *altair.Be
 	}
 	fork := common.Fork{
 		PreviousVersion: preFork.CurrentVersion,
-		CurrentVersion:  spec.MERGE_FORK_VERSION,
+		CurrentVersion:  spec.BELLATRIX_FORK_VERSION,
 		Epoch:           epoch,
 	}
 	latestBlockHeader, err := pre.LatestBlockHeader()

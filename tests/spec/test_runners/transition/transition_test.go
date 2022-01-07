@@ -45,7 +45,7 @@ func (c *TransitionTestCase) Load(t *testing.T, testFork test_util.ForkName, rea
 		c.Spec.ALTAIR_FORK_EPOCH = common.Epoch(m.ForkEpoch)
 	case "merge":
 		preForkName = "altair"
-		c.Spec.MERGE_FORK_EPOCH = common.Epoch(m.ForkEpoch)
+		c.Spec.BELLATRIX_FORK_EPOCH = common.Epoch(m.ForkEpoch)
 	default:
 		t.Fatalf("unsupported fork %s", testFork)
 	}
@@ -87,7 +87,7 @@ func (c *TransitionTestCase) Load(t *testing.T, testFork test_util.ForkName, rea
 		case "merge":
 			dst := new(merge.SignedBeaconBlock)
 			test_util.LoadSpecObj(t, fmt.Sprintf("blocks_%d", i), dst, readPart)
-			digest := common.ComputeForkDigest(c.Spec.MERGE_FORK_VERSION, valRoot)
+			digest := common.ComputeForkDigest(c.Spec.BELLATRIX_FORK_VERSION, valRoot)
 			return dst.Envelope(c.Spec, digest)
 		default:
 			t.Fatalf("unrecognized fork name: %s", forkName)

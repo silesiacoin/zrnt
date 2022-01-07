@@ -47,7 +47,7 @@ func (c *FinalityTestCase) Load(t *testing.T, forkName test_util.ForkName, readP
 		case "merge":
 			dst := new(merge.SignedBeaconBlock)
 			test_util.LoadSpecObj(t, fmt.Sprintf("blocks_%d", i), dst, readPart)
-			digest := common.ComputeForkDigest(c.Spec.MERGE_FORK_VERSION, valRoot)
+			digest := common.ComputeForkDigest(c.Spec.BELLATRIX_FORK_VERSION, valRoot)
 			return dst.Envelope(c.Spec, digest)
 		default:
 			t.Fatal(fmt.Errorf("unrecognized fork name: %s", forkName))

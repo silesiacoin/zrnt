@@ -140,8 +140,8 @@ type Config struct {
 	ALTAIR_FORK_EPOCH   Epoch   `yaml:"ALTAIR_FORK_EPOCH" json:"ALTAIR_FORK_EPOCH"`
 
 	// Merge
-	MERGE_FORK_VERSION Version `yaml:"MERGE_FORK_VERSION" json:"MERGE_FORK_VERSION"`
-	MERGE_FORK_EPOCH   Epoch   `yaml:"MERGE_FORK_EPOCH" json:"MERGE_FORK_EPOCH"`
+	BELLATRIX_FORK_VERSION Version `yaml:"BELLATRIX_FORK_VERSION" json:"BELLATRIX_FORK_VERSION"`
+	BELLATRIX_FORK_EPOCH   Epoch   `yaml:"BELLATRIX_FORK_EPOCH" json:"BELLATRIX_FORK_EPOCH"`
 
 	// Sharding
 	SHARDING_FORK_VERSION Version `yaml:"SHARDING_FORK_VERSION" json:"SHARDING_FORK_VERSION"`
@@ -281,10 +281,10 @@ func (spec *Spec) ForkVersion(slot Slot) Version {
 	epoch := spec.SlotToEpoch(slot)
 	if epoch < spec.ALTAIR_FORK_EPOCH {
 		return spec.GENESIS_FORK_VERSION
-	} else if epoch < spec.MERGE_FORK_EPOCH {
+	} else if epoch < spec.BELLATRIX_FORK_EPOCH {
 		return spec.ALTAIR_FORK_VERSION
 	} else if epoch < spec.SHARDING_FORK_EPOCH {
-		return spec.MERGE_FORK_VERSION
+		return spec.BELLATRIX_FORK_VERSION
 	} else {
 		return spec.SHARDING_FORK_VERSION
 	}
